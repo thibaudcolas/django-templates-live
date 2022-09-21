@@ -1,3 +1,5 @@
+import { DOMAttributes }  from 'react';
+
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
@@ -6,6 +8,16 @@ import styles from "../styles/Home.module.css";
 
 import Demo, { delayAndIdle } from "../components/Demo";
 import { useEffect, useRef, useState } from "react";
+
+type CustomElement<T> = Partial<T & DOMAttributes<T> & { children: any }>;
+
+declare global {
+  namespace JSX {
+    interface IntrinsicElements {
+      ['py-button']: CustomElement<any>;
+    }
+  }
+}
 
 const Home: NextPage = () => {
   const ref = useRef(null);

@@ -8,10 +8,10 @@ const Editor = dynamic(import("./Editor"), { ssr: false });
 
 declare global {
   interface Window {
-    requestIdleCallback: (
-      callback: () => void,
-      config: { timeout: number }
-    ) => void;
+    text_input: HTMLInputElement;
+    config_input: HTMLTextAreaElement;
+    out: HTMLDivElement;
+    render: HTMLButtonElement;
   }
 }
 
@@ -136,11 +136,12 @@ const Demo = () => {
               className="border-2 rounded-sm p-2 border-gray-mid-dark ms-4"
               options={fixturesOptions}
               onChange={(value) => {
+                const v = value as 'hello_world' | 'button_component';
                 setExample(value);
-                set_template_source(fixtures[value].source);
-                set_template_config(fixtures[value].config);
-                window.text_input.value = fixtures[value].source;
-                window.config_input.value = fixtures[value].config;
+                set_template_source(fixtures[v].source);
+                set_template_config(fixtures[v].config);
+                window.text_input.value = fixtures[v].source;
+                window.config_input.value = fixtures[v].config;
                 delayAndIdle(
                   () => {
                     const evt = new CustomEvent("click");
@@ -149,7 +150,7 @@ const Demo = () => {
                   5,
                   300
                 );
-                setAnnotations(fixtures[value].output);
+                setAnnotations(fixtures[v].output);
               }}
             ></Select>
           </label>
@@ -170,7 +171,7 @@ const Demo = () => {
         theme={theme}
         value={template_source}
         annotations={annotations}
-        onChange={(val) => {
+        onChange={(val: string) => {
           window.text_input.value = val;
           delayAndIdle(
             () => {
@@ -191,7 +192,7 @@ const Demo = () => {
           theme={theme}
           value={template_config}
           annotations={[]}
-          onChange={(val) => {
+          onChange={(val: string) => {
             window.config_input.value = val;
             delayAndIdle(
               () => {

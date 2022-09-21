@@ -1,4 +1,4 @@
-import React, { Component, useCallback } from "react";
+import React, { ChangeEvent, Component, useCallback } from "react";
 
 interface SelectProps {
   value: string;
@@ -13,7 +13,7 @@ interface SelectProps {
 }
 
 const Select = ({ value, id, className, options, onChange }: SelectProps) => {
-  const handleChange = useCallback((e) => onChange(e.target.value), [onChange]);
+  const handleChange = useCallback((e: ChangeEvent<HTMLSelectElement>) => onChange(e.target.value), [onChange]);
 
   return (
     <select value={value} id={id} className={className} onChange={handleChange}>
