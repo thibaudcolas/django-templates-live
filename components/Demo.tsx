@@ -73,6 +73,24 @@ const fixtures = {
 `,
     output: [],
   },
+  fragment_example: {
+    label: "fragment example",
+    config: JSON.stringify({
+      context: {
+        name: "Porto",
+      },
+    }),
+    source: `{% load i18n %}
+
+{% fragment as my_label %}
+  {% translate 'Visit our shop' %}
+  {% include "icon.html" with name="external-link" %}
+{% endfragment %}
+
+
+{% include "button.html" with label=my_label target_url="https://www.example.com/" %}`,
+    output: [],
+  },
 };
 
 const editorThemes = [

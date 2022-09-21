@@ -16,7 +16,7 @@ export default class Editor extends Component {
         mode={mode || "nunjucks"}
         theme={theme}
         className="w-full 2xl:col-span-2"
-        width={600}
+        width={800}
         height={mode === "json" ? 200 : 350}
         fontSize={24}
         name={name}

@@ -40,6 +40,11 @@ TEMPLATES = [
                     'help_block.html': """
 Hey help_block
 """,
+                    'icon.html': """
+<svg class="icon icon--{{ name }}{% if classname %} {{ classname }}{% endif %}" aria-hidden="true">
+    <use href="#{{ name }}"></use>
+</svg>
+""",
                     'quote_block.html': """
 <blockquote class="quote-block block--spacing">
     <div class="quote-block__text">
