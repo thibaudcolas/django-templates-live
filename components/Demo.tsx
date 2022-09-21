@@ -122,6 +122,7 @@ const Demo = () => {
   useEffect(() => {
     window.text_input.value = template_source;
     window.config_input.value = template_config;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
     <div className="gap-4">
